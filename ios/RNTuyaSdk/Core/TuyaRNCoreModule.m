@@ -65,11 +65,12 @@ RCT_REMAP_METHOD(apiRequest,
   
   NSString *apiName       = [parameters objectForKey:@"apiName"];
   NSDictionary *postData  = [parameters objectForKey:@"postData"];
+  NSDictionary *getData  = [parameters objectForKey:@"getData"];
   NSString *version       = [parameters objectForKey:@"version"];
   
   TuyaSmartRequest *request = [TuyaSmartRequest new];
   
-  [request requestWithApiName:apiName postData:postData version:version success:^(id result) {
+  [request requestWithApiName:apiName postData:postData getData:getData version:version success:^(id result) {
     if ([result isKindOfClass:[NSDictionary class]] || [result isKindOfClass:[NSArray class]]) {
       if (resolver) {
         resolver([result tysdk_JSONString]);

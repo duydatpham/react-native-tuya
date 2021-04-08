@@ -74,11 +74,11 @@ RCT_EXPORT_METHOD(getValidateCode:(NSDictionary *)params resolver:(RCTPromiseRes
       aType = validateType.integerValue;
     }
   }
-  [[TuyaSmartUser sharedInstance] sendVerifyCode:countryCode phoneNumber:phoneNumber type:aType success:^{
-    [TuyaRNUtils resolverWithHandler:resolver];
-  } failure:^(NSError *error) {
-    [TuyaRNUtils rejecterWithError:error handler:rejecter];
-  }];
+  // [[TuyaSmartUser sharedInstance] sendVerifyCode:countryCode phoneNumber:phoneNumber type:aType success:^{
+  //   [TuyaRNUtils resolverWithHandler:resolver];
+  // } failure:^(NSError *error) {
+  //   [TuyaRNUtils rejecterWithError:error handler:rejecter];
+  // }];
 }
 
 /* 手机验证码登陆
