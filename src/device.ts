@@ -24,13 +24,21 @@ export function registerDevListener(
   type: DevListenerType,
   callback: (data: any) => void
 ) {
-  tuya.registerDevListener(params);
+  if (!!devListenerSubs[params.devId] && !!devListenerSubs[params.devId][type]) {
+    unRegisterDevListener(params.devId, type);
+  }
+
+  if (!devListenerSubs[params.devId] || Object.keys(devListenerSubs[params.devId]).length == 0)
+    tuya.registerDevListener(params);
   const sub = addEvent(bridge(DEVLISTENER, params.devId), data => {
     if (data.type === type) {
       callback(data);
     }
   });
-  devListenerSubs[params.devId] = sub;
+  if (!devListenerSubs[params.devId]) {
+    devListenerSubs[params.devId] = {}
+  }
+  devListenerSubs[params.devId][type] = sub;
 }
 
 export function unRegisterAllDevListeners() {
@@ -40,6 +48,18 @@ export function unRegisterAllDevListeners() {
     tuya.unRegisterDevListener({ devId });
   }
   devListenerSubs = {};
+}
+
+export function unRegisterDevListener(devId: string, type: DevListenerType) {
+  if (!devListenerSubs[devId] || !devListenerSubs[devId][type]) {
+    return
+  }
+  const sub = devListenerSubs[devId][type];
+  sub.remove();
+
+  delete devListenerSubs[devId][type]
+  if (!devListenerSubs[devId] || Object.keys(devListenerSubs[devId]).length == 0)
+    tuya.unRegisterDevListener({ devId });
 }
 
 export type DeviceDpValue = boolean | number | string;

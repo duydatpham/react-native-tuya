@@ -34,9 +34,9 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "@volst/react-native-tuya",
+  "name": "react-native-tuya",
   "description": "React Native bindings for the Tuya SDK",
-  "homepage": "https://github.com/Volst/react-native-tuya#readme",
+  "homepage": "https://github.com/duydatpham/react-native-tuya#readme",
   "author": "Kees Kluskens",
   "module": "dist/react-native-tuya.esm.js",
   "devDependencies": {
