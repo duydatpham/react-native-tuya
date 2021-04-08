@@ -1,4 +1,4 @@
-import { NativeModules, EmitterSubscription } from 'react-native';
+import { NativeModules } from 'react-native';
 import { addEvent, bridge, DEVLISTENER } from './bridgeUtils';
 
 const tuya = NativeModules.TuyaDeviceModule;
@@ -17,7 +17,7 @@ export type DevListenerType =
   | 'onFirmwareUpgradeFailure'
   | 'onFirmwareUpgradeProgress';
 
-let devListenerSubs: { [devId: string]: EmitterSubscription } = {};
+let devListenerSubs: { [devId: string]: any } = {};
 
 export function registerDevListener(
   params: DevListenerParams,
